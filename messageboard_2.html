@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>/pol/ - Politically Incorrect</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tahoma:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #FFFFEE;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 13px;
+            color: #000;
+            min-height: 100vh;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 10px;
+            background-color: #FFFFEE;
+        }
+        
+        .header-image {
+            width: 200px;
+            height: 80px;
+            background: linear-gradient(135deg, #789922 0%, #5c7a1a 50%, #789922 100%);
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #789922;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-image::before {
+            content: "🐸";
+            font-size: 50px;
+            position: absolute;
+        }
+        
+        .header-image-text {
+            position: absolute;
+            bottom: 5px;
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+        
+        .board-title {
+            color: #AF0A0F;
+            font-size: 28px;
+            font-weight: bold;
+            font-family: 'Tahoma', sans-serif;
+        }
+        
+        .board-subtitle {
+            font-size: 10px;
+            color: #AF0A0F;
+            margin-top: 5px;
+        }
+        
+        /* Navigation */
+        .nav-top {
+            background-color: #EEF2FF;
+            padding: 2px 5px;
+            font-size: 11px;
+            border-bottom: 1px solid #B7C5D9;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        
+        .nav-top a {
+            color: #34345C;
+            text-decoration: none;
+            padding: 0 3px;
+        }
+        
+        .nav-top a:hover {
+            color: #D00;
+        }
+        
+        /* New Thread Link */
+        .new-thread-container {
+            text-align: center;
+            margin: 15px 0;
+        }
+        
+        .new-thread-link {
+            color: #0000EE;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        /* Board Info */
+        .board-info {
+            text-align: right;
+            padding: 5px 10px;
+            font-size: 10px;
+            color: #666;
+        }
+        
+        .board-info a {
+            color: #0000EE;
+        }
+        
+        /* Ad Banner */
+        .ad-banner {
+            background: linear-gradient(to right, #00BCD4, #4CAF50);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin: 10px auto;
+            max-width: 600px;
+            font-weight: bold;
+        }
+        
+        .ad-banner-title {
+            font-size: 24px;
+        }
+        
+        .ad-banner-sub {
+            font-size: 16px;
+        }
+        
+        /* Search and controls */
+        .controls {
+            padding: 10px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .controls input[type="text"] {
+            padding: 3px 5px;
+            border: 1px solid #AAA;
+            font-size: 12px;
+        }
+        
+        .controls a {
+            color: #0000EE;
+            font-size: 12px;
+        }
+        
+        /* Sticky Post */
+        .sticky-post {
+            background-color: #D6DAF0;
+            border: 1px solid #B7C5D9;
+            margin: 10px;
+            padding: 10px;
+        }
+        
+        .sticky-icon {
+            color: #789922;
+            font-weight: bold;
+        }
+        
+        /* Warning Notice */
+        .warning-notice {
+            background-color: #F0E0D6;
+            border: 2px solid #D9BFB7;
+            margin: 10px;
+            padding: 15px;
+        }
+        
+        .warning-title {
+            color: #AF0A0F;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .warning-text {
+            color: #AF0A0F;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+        
+        /* Thread container */
+        .thread {
+            margin: 10px;
+            clear: both;
+        }
+        
+        /* OP Post */
+        .op-post {
+            background-color: #F0E0D6;
+            padding: 10px;
+            margin-bottom: 2px;
+        }
+        
+        /* Reply Post */
+        .reply {
+            background-color: #D6DAF0;
+            border: 1px solid #B7C5D9;
+            padding: 10px;
+            margin: 5px 0 5px 20px;
+            display: inline-block;
+            max-width: 90%;
+        }
+        
+        .reply.greentext-reply {
+            background-color: #D6DAF0;
+        }
+        
+        .reply.red-reply {
+            background-color: #FFCCCC;
+            border-color: #E5B7B7;
+        }
+        
+        .reply.yellow-reply {
+            background-color: #F0E68C;
+            border-color: #D4C36A;
+        }
+        
+        /* Post header */
+        .post-header {
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+        
+        .file-info {
+            font-size: 11px;
+            color: #707070;
+            margin-bottom: 5px;
+        }
+        
+        .file-info a {
+            color: #0000EE;
+        }
+        
+        .post-checkbox {
+            vertical-align: middle;
+        }
+        
+        .subject {
+            color: #0F0C5D;
+            font-weight: bold;
+        }
+        
+        .name {
+            color: #117743;
+            font-weight: bold;
+        }
+        
+        .tripcode {
+            color: #228854;
+        }
+        
+        .poster-id {
+            background-color: #8B4513;
+            color: white;
+            padding: 1px 4px;
+            font-size: 10px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        .poster-id.blue { background-color: #5C5CFF; }
+        .poster-id.green { background-color: #228B22; }
+        .poster-id.purple { background-color: #8B008B; }
+        .poster-id.orange { background-color: #FF8C00; }
+        .poster-id.cyan { background-color: #008B8B; }
+        .poster-id.red { background-color: #CD5C5C; }
+        .poster-id.navy { background-color: #000080; }
+        .poster-id.olive { background-color: #808000; }
+        .poster-id.teal { background-color: #008080; }
+        .poster-id.maroon { background-color: #800000; }
+        
+        .flag {
+            width: 16px;
+            height: 11px;
+            vertical-align: middle;
+            margin-right: 3px;
+        }
+        
+        .timestamp {
+            color: #000;
+        }
+        
+        .post-num {
+            color: #000;
+        }
+        
+        .post-num a {
+            color: #000;
+            text-decoration: none;
+        }
+        
+        .reply-link {
+            color: #0000EE;
+            text-decoration: none;
+        }
+        
+        /* Post content */
+        .post-content {
+            margin-top: 5px;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+        
+        .greentext {
+            color: #789922;
+        }
+        
+        .quotelink {
+            color: #D00000;
+            text-decoration: underline;
+        }
+        
+        .deadlink {
+            color: #789922;
+            text-decoration: line-through;
+        }
+        
+        /* Post image */
+        .post-image-container {
+            float: left;
+            margin: 0 20px 10px 0;
+        }
+        
+        .post-image {
+            max-width: 150px;
+            max-height: 150px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .reply .post-image-container {
+            float: left;
+            margin: 0 15px 5px 0;
+        }
+        
+        .reply .post-image {
+            max-width: 125px;
+            max-height: 125px;
+        }
+        
+        /* Omitted posts */
+        .omitted {
+            font-size: 11px;
+            color: #707070;
+            margin: 10px 0 10px 20px;
+        }
+        
+        .omitted a {
+            color: #0000EE;
+        }
+        
+        /* Clear fix */
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        
+        /* Thread separator */
+        .thread-separator {
+            border-bottom: 1px solid #D9BFB7;
+            margin: 20px 10px;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 11px;
+            color: #666;
+            border-top: 1px solid #D9BFB7;
+            margin-top: 20px;
+        }
+        
+        .footer a {
+            color: #0000EE;
+        }
+        
+        /* Inline quote highlight */
+        .inline-quote {
+            background-color: #D6BAD0;
+            padding: 5px;
+            margin: 5px 0;
+            border-left: 3px solid #9370DB;
+        }
+        
+        /* Arrows and indicators */
+        .arrow {
+            color: #789922;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        /* Pin and lock icons */
+        .pin-icon::before {
+            content: "📌";
+            margin-right: 3px;
+        }
+        
+        /* New board notice */
+        .board-notice {
+            font-size: 10px;
+            text-align: right;
+            padding: 5px 10px;
+            color: #000;
+        }
+        
+        .board-notice a {
+            color: #0000EE;
+        }
+        
+        /* Country flags as emoji */
+        .flag-us::before { content: "🇺🇸"; margin-right: 3px; }
+        .flag-uk::before { content: "🇬🇧"; margin-right: 3px; }
+        .flag-de::before { content: "🇩🇪"; margin-right: 3px; }
+        .flag-jp::before { content: "🇯🇵"; margin-right: 3px; }
+        .flag-au::before { content: "🇦🇺"; margin-right: 3px; }
+        .flag-ca::before { content: "🇨🇦"; margin-right: 3px; }
+        .flag-ru::before { content: "🇷🇺"; margin-right: 3px; }
+        .flag-br::before { content: "🇧🇷"; margin-right: 3px; }
+        .flag-in::before { content: "🇮🇳"; margin-right: 3px; }
+        .flag-fr::before { content: "🇫🇷"; margin-right: 3px; }
+        .flag-se::before { content: "🇸🇪"; margin-right: 3px; }
+        .flag-pl::before { content: "🇵🇱"; margin-right: 3px; }
+        
+        /* Reply arrows */
+        .reply-arrows {
+            color: #789922;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <div class="nav-top">
+        <a href="https://x.com" target="_blank" style="font-weight:bold; color:#000; background:#1DA1F2; padding:1px 6px; border-radius:3px; margin-right:10px;">𝕏</a>
+        [<a href="#">a</a> / <a href="#">b</a> / <a href="#">c</a> / <a href="#">d</a> / <a href="#">e</a> / <a href="#">f</a> / <a href="#">g</a> / <a href="#">gif</a> / <a href="#">h</a> / <a href="#">hr</a> / <a href="#">k</a> / <a href="#">m</a> / <a href="#">o</a> / <a href="#">p</a> / <a href="#">r</a> / <a href="#">s</a> / <a href="#">t</a> / <a href="#">u</a> / <a href="#">v</a> / <a href="#">vg</a> / <a href="#">vm</a> / <a href="#">vmg</a> / <a href="#">vr</a> / <a href="#">vrpg</a> / <a href="#">vst</a> / <a href="#">w</a> / <a href="#">wg</a>] [<a href="#">i</a> / <a href="#">ic</a>] [<a href="#">r9k</a> / <a href="#">s4s</a> / <a href="#">vip</a> / <a href="#">qa</a>] [<a href="#">cm</a> / <a href="#">hm</a> / <a href="#">lgbt</a> / <a href="#">y</a>] [<a href="#">3</a> / <a href="#">aco</a> / <a href="#">adv</a> / <a href="#">an</a> / <a href="#">bant</a> / <a href="#">biz</a> / <a href="#">cgl</a> / <a href="#">ck</a> / <a href="#">co</a> / <a href="#">diy</a> / <a href="#">fa</a> / <a href="#">fit</a> / <a href="#">gd</a> / <a href="#">hc</a> / <a href="#">his</a> / <a href="#">int</a> / <a href="#">jp</a> / <a href="#">lit</a> / <a href="#">mlp</a> / <a href="#">mu</a> / <a href="#">n</a> / <a href="#">news</a> / <a href="#">out</a> / <a href="#">po</a> / <a style="font-weight:bold;color:#AF0A0F" href="#">pol</a> / <a href="#">pw</a> / <a href="#">qst</a> / <a href="#">sci</a> / <a href="#">soc</a> / <a href="#">sp</a> / <a href="#">tg</a> / <a href="#">toy</a> / <a href="#">trv</a> / <a href="#">tv</a> / <a href="#">vp</a> / <a href="#">vt</a> / <a href="#">wsg</a> / <a href="#">wsr</a> / <a href="#">x</a> / <a href="#">xs</a>]
+    </div>
+    
+    <!-- Header -->
+    <div class="header">
+        <div class="header-image">
+            <span class="header-image-text">i warned you about 4chan bro</span>
+        </div>
+        <div class="board-title">/pol/ - Politically Incorrect</div>
+    </div>
+    
+    <!-- New Thread Link -->
+    <div class="new-thread-container">
+        [<a href="#" class="new-thread-link">Start a New Thread</a>]
+    </div>
+    
+    <!-- CA Section -->
+    <div style="text-align:center; margin: 10px 0; padding: 15px; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 2px solid #0f3460; border-radius: 5px; max-width: 400px; margin-left: auto; margin-right: auto;">
+        <div style="color: #e94560; font-size: 18px; font-weight: bold; font-family: 'Courier New', monospace;">CA</div>
+        <div style="color: #00ff88; font-size: 12px; margin-top: 5px; font-family: 'Courier New', monospace; animation: blink 1.5s infinite;">⏳ COMING SOON ⏳</div>
+        <style>
+            @keyframes blink {
+                0%, 50%, 100% { opacity: 1; }
+                25%, 75% { opacity: 0.5; }
+            }
+        </style>
+        
+        <!-- Big Twitter Button -->
+        <a href="https://x.com" target="_blank" style="display: inline-block; margin-top: 15px; padding: 15px 40px; background: linear-gradient(135deg, #1DA1F2 0%, #0d8ecf 100%); color: white; font-size: 20px; font-weight: bold; text-decoration: none; border-radius: 50px; box-shadow: 0 4px 15px rgba(29, 161, 242, 0.4); transition: all 0.3s ease; border: none;">
+            <span style="font-size: 24px; vertical-align: middle;">𝕏</span> Follow Us on Twitter
+        </a>
+    </div>
+    
+    <!-- Board Info -->
+    <div class="board-notice">
+        02/19/10 New boards added: /soc/, /r9k/<br>
+        11/28/10 New trial board added: /vg/ - Video Game Generals<br>
+        07/15/11 4chan Pass now available for $20/year<br>
+        <a href="#">[Hide]</a> <a href="#">[Show All]</a>
+    </div>
+    
+    <!-- Ad Banner -->
+    <div class="ad-banner">
+        <div class="ad-banner-title">YOUR AD HERE!</div>
+        <div class="ad-banner-sub">As low as $0.05 for 1,000 views! 🗨️🐸 danbo.org</div>
+    </div>
+    <div style="text-align:center; font-size:10px; margin-bottom:10px;">
+        <a href="#">[Advertise on 4chan]</a>
+    </div>
+    
+    <!-- Controls -->
+    <div class="controls">
+        <input type="text" placeholder="Search OPs...">
+        [<a href="#">Catalog</a>] [<a href="#">Archive</a>]
+    </div>
+    
+    <!-- Sticky Welcome Post -->
+    <div class="thread">
+        <div class="op-post clearfix">
+            <div class="file-info">
+                <span class="sticky-icon">📌</span> File: <a href="#">School-Of-Thought--Falla(...).png</a> (779 KB, 1522x1080)
+            </div>
+            <div class="post-image-container">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='110' viewBox='0 0 150 110'%3E%3Crect fill='%23d4c4b0' width='150' height='110'/%3E%3Ctext x='75' y='45' font-family='Arial' font-size='10' fill='%23333' text-anchor='middle'%3Ethou shalt not%3C/text%3E%3Ctext x='75' y='60' font-family='Arial' font-size='10' fill='%23333' text-anchor='middle'%3Ecommit logical%3C/text%3E%3Ctext x='75' y='75' font-family='Arial' font-size='10' fill='%23333' text-anchor='middle'%3Efallacies%3C/text%3E%3C/svg%3E" class="post-image" alt="School of Thought">
+            </div>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="subject">Welcome to /pol/ - Politically Incorrect</span>
+                <span class="name">Anonymous</span>
+                (ID: <span class="poster-id cyan">XnBoeIK</span>)
+                <span class="flag-us"></span>
+                <span class="timestamp">10/23/11(Sun)02:19:08</span>
+                <span class="post-num">No.<a href="#">503281217</a></span>
+                [<a href="#" class="reply-link">Reply</a>]
+            </div>
+            <div class="post-content">
+                This board is for the discussion of news, world events, political issues, and other related topics.<br><br>
+                Off-topic and /b/-tier threads will be deleted (and possibly earn you a ban, if you persist). Unless they are quality, well thought out, well written posts, the following are examples of off-topic and/or /b/-tier threads:<br><br>
+                <span class="greentext">&gt;Red pill me on X. (with no extra content or input of your own)</span><br>
+                <span class="greentext">&gt;Are X white?</span><br>
+                <span class="greentext">&gt;Is X degeneracy?</span><br>
+                <span class="greentext">&gt;How come X girls love Y guys so much?</span><br>
+                <span class="greentext">&gt;If X is true, then how come Y? Checkmate Z.</span><br><br>
+                The variety of threads allowed here are very flexible and we believe in freedom of speech, but we expect a high level of discourse befitting of the board. Attempts to disrupt the board will not be tolerated, nor will calls to disrupt other boards and sites.
+            </div>
+        </div>
+    </div>
+    
+    <!-- Warning Notice -->
+    <div class="warning-notice">
+        <div class="post-image-container">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Crect fill='%23004080' width='80' height='80'/%3E%3Ctext x='40' y='35' font-family='Impact' font-size='12' fill='white' text-anchor='middle'%3ESLVCK%3C/text%3E%3Ctext x='40' y='50' font-family='Impact' font-size='12' fill='white' text-anchor='middle'%3EDOWN%3C/text%3E%3C/svg%3E" class="post-image" alt="Slack Down">
+        </div>
+        <div class="warning-title">Check the catalog before posting a new thread!</div>
+        <div class="warning-text">Reply to existing threads about a topic instead of starting a new one. New users who do not abide by this principle will be temporarily blocked from creating threads. Mods will delete obvious duplicate threads and spam without notice are probably other threads about it. Go look!</div>
+    </div>
+    
+    <div class="thread-separator"></div>
+    
+    <!-- MAIN THREAD: Recruiting Moot -->
+    <div class="thread">
+        <div class="op-post clearfix">
+            <div class="file-info">
+                File: <a href="#">moot_portrait.jpg</a> (234 KB, 1200x800)
+            </div>
+            <div class="post-image-container">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='100' viewBox='0 0 150 100'%3E%3Crect fill='%232d3748' width='150' height='100'/%3E%3Ccircle cx='75' cy='35' r='20' fill='%23e2e8f0'/%3E%3Crect x='55' y='55' width='40' height='35' fill='%23e2e8f0' rx='5'/%3E%3Ctext x='75' y='90' font-family='Arial' font-size='8' fill='%2363b3ed' text-anchor='middle'%3E10x ENGINEER%3C/text%3E%3C/svg%3E" class="post-image" alt="Moot Portrait">
+            </div>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="subject">URGENT: We need to recruit Moot - He's the 10x engineer we've been looking for</span>
+                <span class="name">mynamejeff</span>
+                <span class="tripcode">!!vK3F8zXc</span>
+                (ID: <span class="poster-id blue">7xKp2mNq</span>)
+                <span class="flag-us"></span>
+                <span class="timestamp">10/23/11(Sun)14:23:45</span>
+                <span class="post-num">No.<a href="#">527601234</a></span>
+                [<a href="#" class="reply-link">Reply</a>]
+            </div>
+            <div class="post-content">
+                Listen up anons. I just found out about this absolute BEAST of an engineer called Moot. This guy is literally the founder-tier talent we need.<br><br>
+                <span class="greentext">&gt;Runs circles around senior devs</span><br>
+                <span class="greentext">&gt;Ships features faster than you can write tickets</span><br>
+                <span class="greentext">&gt;Based and red-pilled on clean architecture</span><br><br>
+                @groff you NEED to bring him along to the next meetup. This is NOT optional. Our whole project depends on getting someone like this on the team.<br><br>
+                Who else has intel on Moot? Drop it ITT.
+            </div>
+        </div>
+        
+        <div class="omitted">
+            <span class="arrow">▶</span> 47 replies and 8 images omitted. <a href="#">Click here</a> to view.
+        </div>
+        
+        <!-- Reply 1 -->
+        <div class="reply clearfix">
+            <span class="reply-arrows">&gt;&gt;</span>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="name">groff</span>
+                <span class="tripcode">!techLead</span>
+                (ID: <span class="poster-id green">Hk9sL2Wm</span>)
+                <span class="flag-us"></span>
+                <span class="timestamp">10/23/11(Sun)14:28:12</span>
+                <span class="post-num">No.<a href="#">527601298</a></span>
+                <span class="arrow">▶</span>
+                <a href="#" class="quotelink">&gt;&gt;527601456</a>
+                <a href="#" class="quotelink">&gt;&gt;527601523</a>
+            </div>
+            <div class="post-content">
+                <a href="#" class="quotelink">&gt;&gt;527601234</a><br>
+                Jeff I know who you're talking about. Met Moot at that hackathon last month. Guy literally refactored our entire auth system in like 3 hours while everyone else was still reading the docs.<br><br>
+                I'll reach out to him on Discord. But fair warning - he's already got like 5 offers from FAANG companies. We need to make this pitch GOOD.<br><br>
+                What's our equity offer looking like? We might need to sweeten the deal.
+            </div>
+        </div>
+        
+        <!-- Reply 2 -->
+        <div class="reply red-reply clearfix">
+            <span class="reply-arrows">&gt;&gt;</span>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="name">Boris</span>
+                <span class="tripcode">!partyHard</span>
+                (ID: <span class="poster-id orange">XwQ3n8Yp</span>)
+                <span class="flag-ru"></span>
+                <span class="timestamp">10/23/11(Sun)14:35:47</span>
+                <span class="post-num">No.<a href="#">527601456</a></span>
+                <span class="arrow">▶</span>
+                <a href="#" class="quotelink">&gt;&gt;527601523</a>
+                <a href="#" class="quotelink">&gt;&gt;527601612</a>
+            </div>
+            <div class="post-content">
+                <a href="#" class="quotelink">&gt;&gt;527601298</a><br>
+                YOOO the party last night was absolutely LIT frens 🔥🔥🔥<br><br>
+                And guess who I ran into? MOOT HIMSELF. Guy was there showing off some side project - an AI that generates deployment pipelines. My jaw literally dropped.<br><br>
+                He seemed interested when I mentioned our startup. I think the vision resonated with him. Also he can drink like a CHAMP, absolute legend.<br><br>
+                <span class="greentext">&gt;tfw you meet a legendary engineer at a random house party</span><br><br>
+                We're all gonna make it bros
+            </div>
+        </div>
+        
+        <!-- Reply 3 -->
+        <div class="reply clearfix">
+            <span class="reply-arrows">&gt;&gt;</span>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="name">Anonymous</span>
+                (ID: <span class="poster-id purple">9Kx2mPqR</span>)
+                <span class="flag-de"></span>
+                <span class="timestamp">10/23/11(Sun)14:42:33</span>
+                <span class="post-num">No.<a href="#">527601523</a></span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="post-content">
+                <a href="#" class="quotelink">&gt;&gt;527601456</a><br>
+                <a href="#" class="quotelink">&gt;&gt;527601298</a><br><br>
+                Wait wait wait. THE Moot? The guy who built that distributed caching system that handles 10 million requests per second?<br><br>
+                I've been following his GitHub for months. His code is like poetry. No comments needed because everything is self-documenting.<br><br>
+                If you guys land him, your company is going to the moon. Absolutely based recruitment target.
+            </div>
+        </div>
+        
+        <!-- Reply 4 -->
+        <div class="reply yellow-reply clearfix">
+            <span class="reply-arrows">&gt;&gt;</span>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="name">mynamejeff</span>
+                <span class="tripcode">!!vK3F8zXc</span>
+                (ID: <span class="poster-id blue">7xKp2mNq</span>)
+                <span class="flag-us"></span>
+                <span class="timestamp">10/23/11(Sun)14:48:19</span>
+                <span class="post-num">No.<a href="#">527601612</a></span>
+                <span class="arrow">▶</span>
+                <a href="#" class="quotelink">&gt;&gt;527601701</a>
+            </div>
+            <div class="post-content">
+                <a href="#" class="quotelink">&gt;&gt;527601456</a><br><br>
+                BORIS YOU ABSOLUTE LEGEND. Why didn't you lead with this???<br><br>
+                <span class="greentext">&gt;randomly meets our top recruiting target at a party</span><br>
+                <span class="greentext">&gt;he's already interested</span><br>
+                <span class="greentext">&gt;this timeline</span><br><br>
+                Groff, forget the cold outreach. Boris has the connect. We need to set up a proper meeting ASAP. Maybe dinner? Somewhere nice but not try-hard.<br><br>
+                Also Boris did you get his contact info or did you fumble it after too many drinks lmao
+            </div>
+        </div>
+        
+        <!-- Reply 5 -->
+        <div class="reply clearfix">
+            <span class="reply-arrows">&gt;&gt;</span>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="name">ChadDev</span>
+                (ID: <span class="poster-id cyan">Lm4nP8qX</span>)
+                <span class="flag-ca"></span>
+                <span class="timestamp">10/23/11(Sun)14:55:02</span>
+                <span class="post-num">No.<a href="#">527601701</a></span>
+                <span class="arrow">▶</span>
+                <a href="#" class="quotelink">&gt;&gt;527601789</a>
+            </div>
+            <div class="post-content">
+                <a href="#" class="quotelink">&gt;&gt;527601612</a><br><br>
+                Jumping in here. I actually worked with Moot at my last gig before he went freelance. Can confirm the hype is 100% real.<br><br>
+                Few things you should know for the pitch:<br>
+                - He HATES bureaucracy. Keep the process simple.<br>
+                - He cares more about the problem than the money (but still pay him well obviously)<br>
+                - He's really into distributed systems and real-time data<br><br>
+                If your product has interesting technical challenges, emphasize those. That's what gets him excited.
+            </div>
+        </div>
+        
+        <!-- Reply 6 -->
+        <div class="reply clearfix">
+            <span class="reply-arrows">&gt;&gt;</span>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="name">Boris</span>
+                <span class="tripcode">!partyHard</span>
+                (ID: <span class="poster-id orange">XwQ3n8Yp</span>)
+                <span class="flag-ru"></span>
+                <span class="timestamp">10/23/11(Sun)15:02:38</span>
+                <span class="post-num">No.<a href="#">527601789</a></span>
+                <span class="arrow">▶</span>
+                <a href="#" class="quotelink">&gt;&gt;527601867</a>
+            </div>
+            <div class="post-content">
+                <a href="#" class="quotelink">&gt;&gt;527601612</a><br><br>
+                Relax Jeff I'm not THAT drunk of a person lol. Yes I got his Telegram. We talked for like an hour about system design patterns.<br><br>
+                He mentioned he's burned out on corporate stuff and looking for something more "founder-mode" if you know what I mean.<br><br>
+                <span class="greentext">&gt;mfw we might actually land a 10x engineer</span><br>
+                <span class="greentext">&gt;mfw we're all gonna make it</span><br><br>
+                Setting up a group chat now. @groff @mynamejeff check your Telegram.
+            </div>
+        </div>
+        
+        <!-- Reply 7 -->
+        <div class="reply clearfix">
+            <span class="reply-arrows">&gt;&gt;</span>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="name">groff</span>
+                <span class="tripcode">!techLead</span>
+                (ID: <span class="poster-id green">Hk9sL2Wm</span>)
+                <span class="flag-us"></span>
+                <span class="timestamp">10/23/11(Sun)15:08:14</span>
+                <span class="post-num">No.<a href="#">527601867</a></span>
+                <span class="arrow">▶</span>
+                <a href="#" class="quotelink">&gt;&gt;527601945</a>
+            </div>
+            <div class="post-content">
+                <a href="#" class="quotelink">&gt;&gt;527601789</a><br><br>
+                Just joined the group. Boris you beautiful Slavic bastard, this is huge.<br><br>
+                <a href="#" class="quotelink">&gt;&gt;527601701</a><br>
+                ChadDev thanks for the intel. We've got some gnarly scaling problems he'd love to sink his teeth into.<br><br>
+                Alright team, we need to coordinate this properly. I'm thinking:<br>
+                1. Casual coffee this week - feel him out<br>
+                2. Technical deep-dive next week - show him the codebase<br>
+                3. Formal offer if he's interested<br><br>
+                No pressure tactics. Let the work speak for itself.
+            </div>
+        </div>
+        
+        <!-- Reply 8 -->
+        <div class="reply clearfix">
+            <span class="reply-arrows">&gt;&gt;</span>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="name">Anonymous</span>
+                (ID: <span class="poster-id red">Wm8nQ2Lx</span>)
+                <span class="flag-au"></span>
+                <span class="timestamp">10/23/11(Sun)15:15:43</span>
+                <span class="post-num">No.<a href="#">527601945</a></span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="post-content">
+                <a href="#" class="quotelink">&gt;&gt;527601867</a><br><br>
+                Lurker here. Just want to say I've been following this thread and you guys actually seem like you have your stuff together.<br><br>
+                Most recruiting threads are cringe but this is based. Good luck landing Moot. The tech industry needs more of this grassroots networking instead of endless LinkedIn spam.<br><br>
+                <span class="greentext">&gt;inb4 this startup becomes the next unicorn because of one party connection</span>
+            </div>
+        </div>
+        
+        <!-- Reply 9 -->
+        <div class="reply yellow-reply clearfix">
+            <span class="reply-arrows">&gt;&gt;</span>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="name">mynamejeff</span>
+                <span class="tripcode">!!vK3F8zXc</span>
+                (ID: <span class="poster-id blue">7xKp2mNq</span>)
+                <span class="flag-us"></span>
+                <span class="timestamp">10/23/11(Sun)15:22:08</span>
+                <span class="post-num">No.<a href="#">527602018</a></span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="post-content">
+                <a href="#" class="quotelink">&gt;&gt;527601867</a><br><br>
+                This plan is perfect. Groff you're locked in.<br><br>
+                OK I'm heading to the group chat. Let's make this happen anons. We're writing history here. Future employees will read about how we recruited the legendary Moot through a 4chan thread and a random party.<br><br>
+                <span class="greentext">&gt;wagmi</span><br><br>
+                Thread theme: <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">https://www.youtube.com/watch?v=herewegoagain</a>
+            </div>
+        </div>
+        
+        <!-- Reply 10 -->
+        <div class="reply clearfix">
+            <span class="reply-arrows">&gt;&gt;</span>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="name">techBro420</span>
+                (ID: <span class="poster-id navy">Pk3mN9Qx</span>)
+                <span class="flag-jp"></span>
+                <span class="timestamp">10/23/11(Sun)15:28:55</span>
+                <span class="post-num">No.<a href="#">527602089</a></span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="post-content">
+                Not gonna lie, this whole thread is heartwarming in a weird way.<br><br>
+                <span class="greentext">&gt;random anons banding together</span><br>
+                <span class="greentext">&gt;to recruit an engineer</span><br>
+                <span class="greentext">&gt;through pure networking and respect</span><br>
+                <span class="greentext">&gt;no corpo HR nonsense</span><br><br>
+                This is how hiring should work. Keep us updated OP. I'm invested in this saga now.
+            </div>
+        </div>
+        
+        <!-- Reply 11 -->
+        <div class="reply clearfix">
+            <span class="reply-arrows">&gt;&gt;</span>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="name">Boris</span>
+                <span class="tripcode">!partyHard</span>
+                (ID: <span class="poster-id orange">XwQ3n8Yp</span>)
+                <span class="flag-ru"></span>
+                <span class="timestamp">10/23/11(Sun)15:35:21</span>
+                <span class="post-num">No.<a href="#">527602167</a></span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="post-content">
+                UPDATE: Just got off a quick call with Moot. He remembers me from the party (thank god lol).<br><br>
+                He's down for coffee on Thursday. Says he's been lurking /g/ and saw some discussion about our product already. Small world.<br><br>
+                <span class="greentext">&gt;he's based</span><br>
+                <span class="greentext">&gt;he's curious</span><br>
+                <span class="greentext">&gt;we're so back</span><br><br>
+                Jeff, Groff - Thursday at 3pm, that coffee place downtown. Don't be late.
+            </div>
+        </div>
+        
+        <!-- Reply 12 -->
+        <div class="reply clearfix">
+            <span class="reply-arrows">&gt;&gt;</span>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="name">groff</span>
+                <span class="tripcode">!techLead</span>
+                (ID: <span class="poster-id green">Hk9sL2Wm</span>)
+                <span class="flag-us"></span>
+                <span class="timestamp">10/23/11(Sun)15:41:09</span>
+                <span class="post-num">No.<a href="#">527602245</a></span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="post-content">
+                <a href="#" class="quotelink">&gt;&gt;527602167</a><br><br>
+                LETS GOOOOO 🚀🚀🚀<br><br>
+                Thursday 3pm locked in. I'm bringing the architecture diagrams. Jeff, you handle the vision pitch. Boris, just... be yourself I guess. You're clearly the social glue here.<br><br>
+                This is it boys. We're gonna make history.
+            </div>
+        </div>
+    </div>
+    
+    <div class="thread-separator"></div>
+    
+    <!-- Party Thread: Island Vibes -->
+    <div class="thread">
+        <div class="op-post clearfix">
+            <div class="file-info">
+                File: <a href="#">bali_sunrise.jpg</a> (1.2 MB, 2400x1600)
+            </div>
+            <div class="post-image-container">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='100' viewBox='0 0 150 100'%3E%3Cdefs%3E%3ClinearGradient id='sky' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23ff7e5f'/%3E%3Cstop offset='100%25' style='stop-color:%23feb47b'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23sky)' width='150' height='70'/%3E%3Crect fill='%2300bcd4' y='70' width='150' height='30'/%3E%3Ccircle cx='120' cy='25' r='15' fill='%23fff176'/%3E%3Cellipse cx='40' cy='75' rx='25' ry='8' fill='%23a5d6a7'/%3E%3Ctext x='75' y='90' font-family='Arial' font-size='8' fill='white' text-anchor='middle'%3E🌴 ISLAND LIFE 🌴%3C/text%3E%3C/svg%3E" class="post-image" alt="Island Sunrise">
+            </div>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="subject">HOLY SHIT ANONS - Currently hungover in Bali and life has never been better</span>
+                <span class="name">IslandChad</span>
+                <span class="tripcode">!vibesOnly</span>
+                (ID: <span class="poster-id cyan">Bx7mK9Lp</span>)
+                <span class="flag-au"></span>
+                <span class="timestamp">10/23/11(Sun)09:15:33</span>
+                <span class="post-num">No.<a href="#">527589001</a></span>
+                [<a href="#" class="reply-link">Reply</a>]
+            </div>
+            <div class="post-content">
+                Bros I am LITERALLY sitting on the beach right now, head pounding from last night but watching the most insane sunrise I've ever seen.<br><br>
+                <span class="greentext">&gt;be me</span><br>
+                <span class="greentext">&gt;quit my wagecuck job 3 months ago</span><br>
+                <span class="greentext">&gt;yolo'd into remote work</span><br>
+                <span class="greentext">&gt;now living the dream in southeast asia</span><br><br>
+                Last night's beach party was LEGENDARY. Met some absolute legends from /biz/ who are also here. Small world.<br><br>
+                Why are you still in your cubicle anon? Life is too short. 🌴🍹
+            </div>
+        </div>
+        
+        <div class="omitted">
+            <span class="arrow">▶</span> 89 replies and 34 images omitted. <a href="#">Click here</a> to view.
+        </div>
+        
+        <!-- Reply 1 -->
+        <div class="reply clearfix">
+            <span class="reply-arrows">&gt;&gt;</span>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="name">Anonymous</span>
+                (ID: <span class="poster-id green">Nm4pQ2Wx</span>)
+                <span class="flag-us"></span>
+                <span class="timestamp">10/23/11(Sun)09:22:17</span>
+                <span class="post-num">No.<a href="#">527589078</a></span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="post-content">
+                <a href="#" class="quotelink">&gt;&gt;527589001</a><br><br>
+                Bro I'm so jealous rn. Sitting in my gray office watching rain outside.<br><br>
+                How much does it actually cost to live out there? Seriously considering making the jump.
+            </div>
+        </div>
+        
+        <!-- Reply 2 -->
+        <div class="reply yellow-reply clearfix">
+            <span class="reply-arrows">&gt;&gt;</span>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="name">IslandChad</span>
+                <span class="tripcode">!vibesOnly</span>
+                (ID: <span class="poster-id cyan">Bx7mK9Lp</span>)
+                <span class="flag-au"></span>
+                <span class="timestamp">10/23/11(Sun)09:28:45</span>
+                <span class="post-num">No.<a href="#">527589134</a></span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="post-content">
+                <a href="#" class="quotelink">&gt;&gt;527589078</a><br><br>
+                Dude like $1500/month for a NICE villa with pool. Food is like $5-10 per meal eating out. Beers are $2.<br><br>
+                I'm spending less than I did on rent alone back in Sydney lmao<br><br>
+                <span class="greentext">&gt;tfw you realize the western rat race is a meme</span>
+            </div>
+        </div>
+        
+        <!-- Reply 3 -->
+        <div class="reply clearfix">
+            <span class="reply-arrows">&gt;&gt;</span>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="name">BeachBum420</span>
+                (ID: <span class="poster-id orange">Kp8nL3Qx</span>)
+                <span class="flag-de"></span>
+                <span class="timestamp">10/23/11(Sun)09:35:22</span>
+                <span class="post-num">No.<a href="#">527589201</a></span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="post-content">
+                YO I WAS AT THAT PARTY LAST NIGHT<br><br>
+                Were you the tall aussie guy doing shots with the Finnish girls?? Small freaking world<br><br>
+                My head is absolutely DESTROYED today but zero regrets. That DJ set at 3am was transcendent.<br><br>
+                Anyone down for hair of the dog at the beach bar around noon? 🍻
+            </div>
+        </div>
+        
+        <!-- Reply 4 -->
+        <div class="reply clearfix">
+            <span class="reply-arrows">&gt;&gt;</span>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="name">Anonymous</span>
+                (ID: <span class="poster-id purple">Wx9mP4Ln</span>)
+                <span class="flag-se"></span>
+                <span class="timestamp">10/23/11(Sun)09:41:08</span>
+                <span class="post-num">No.<a href="#">527589267</a></span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="post-content">
+                <a href="#" class="quotelink">&gt;&gt;527589201</a><br><br>
+                Bro count me in. I'm at the hostel down the road still recovering. That party was absolutely UNHINGED in the best way.<br><br>
+                The vibes in this place are immaculate. Everyone's so chill and friendly. Made more friends in one week here than in years back home.<br><br>
+                <span class="greentext">&gt;we're all gonna make it</span>
+            </div>
+        </div>
+        
+        <!-- Reply 5 -->
+        <div class="reply red-reply clearfix">
+            <span class="reply-arrows">&gt;&gt;</span>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="name">IslandChad</span>
+                <span class="tripcode">!vibesOnly</span>
+                (ID: <span class="poster-id cyan">Bx7mK9Lp</span>)
+                <span class="flag-au"></span>
+                <span class="timestamp">10/23/11(Sun)09:48:33</span>
+                <span class="post-num">No.<a href="#">527589334</a></span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="post-content">
+                <a href="#" class="quotelink">&gt;&gt;527589201</a><br><br>
+                HAHA YES THAT WAS ME. Those Finnish girls were absolutely wild. One of them is a software dev too - we talked about Rust for like an hour while completely hammered 😂<br><br>
+                <a href="#" class="quotelink">&gt;&gt;527589267</a><br>
+                Noon at Finns Beach Club? I'll be there with my laptop pretending to work while nursing a Bintang.<br><br>
+                This is what life is supposed to be frens. Work hard, party harder, do it somewhere beautiful. 🌅
+            </div>
+        </div>
+    </div>
+    
+    <div class="thread-separator"></div>
+    
+    <!-- Party Thread 2: Thailand Full Moon -->
+    <div class="thread">
+        <div class="op-post clearfix">
+            <div class="file-info">
+                File: <a href="#">fullmoon_party.png</a> (890 KB, 1920x1080)
+            </div>
+            <div class="post-image-container">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='100' viewBox='0 0 150 100'%3E%3Crect fill='%231a1a2e' width='150' height='100'/%3E%3Ccircle cx='120' cy='20' r='12' fill='%23f5f5dc'/%3E%3Crect fill='%232d2d44' y='70' width='150' height='30'/%3E%3Ccircle cx='30' cy='85' r='3' fill='%23ff0080'/%3E%3Ccircle cx='50' cy='80' r='3' fill='%2300ff00'/%3E%3Ccircle cx='70' cy='85' r='3' fill='%23ffff00'/%3E%3Ccircle cx='90' cy='80' r='3' fill='%23ff00ff'/%3E%3Ccircle cx='110' cy='85' r='3' fill='%2300ffff'/%3E%3Ctext x='75' y='55' font-family='Impact' font-size='10' fill='%23ff6b6b' text-anchor='middle'%3EFULL MOON%3C/text%3E%3Ctext x='75' y='67' font-family='Impact' font-size='10' fill='%23ffd93d' text-anchor='middle'%3EPARTY%3C/text%3E%3C/svg%3E" class="post-image" alt="Full Moon Party">
+            </div>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="subject">Just survived the Full Moon Party - My liver is filing for divorce</span>
+                <span class="name">PartyAnimal</span>
+                <span class="tripcode">!sendhelp</span>
+                (ID: <span class="poster-id red">Qm5nK8Wp</span>)
+                <span class="flag-uk"></span>
+                <span class="timestamp">10/23/11(Sun)11:05:17</span>
+                <span class="post-num">No.<a href="#">527591001</a></span>
+                [<a href="#" class="reply-link">Reply</a>]
+            </div>
+            <div class="post-content">
+                ANONS. ANONS. I have ASCENDED and returned to tell the tale.<br><br>
+                Full Moon Party in Koh Phangan last night. 30,000 people on the beach. Absolute CHAOS in the best possible way.<br><br>
+                <span class="greentext">&gt;fire dancers everywhere</span><br>
+                <span class="greentext">&gt;neon paint fights</span><br>
+                <span class="greentext">&gt;buckets of whiskey for like $5</span><br>
+                <span class="greentext">&gt;danced until sunrise</span><br>
+                <span class="greentext">&gt;watched the sun come up with strangers who are now friends</span><br><br>
+                Currently horizontal in my bungalow. Can't move. No regrets. 10/10 would destroy myself again.<br><br>
+                If you haven't done this at least once in your life, you're ngmi
+            </div>
+        </div>
+        
+        <div class="omitted">
+            <span class="arrow">▶</span> 156 replies and 67 images omitted. <a href="#">Click here</a> to view.
+        </div>
+        
+        <!-- Reply 1 -->
+        <div class="reply clearfix">
+            <span class="reply-arrows">&gt;&gt;</span>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="name">Anonymous</span>
+                (ID: <span class="poster-id blue">Lk3nP9Qx</span>)
+                <span class="flag-ca"></span>
+                <span class="timestamp">10/23/11(Sun)11:12:44</span>
+                <span class="post-num">No.<a href="#">527591078</a></span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="post-content">
+                <a href="#" class="quotelink">&gt;&gt;527591001</a><br><br>
+                Dude I was there too! Did you see the guy who climbed the giant mushroom sculpture at like 4am? Absolute madlad.<br><br>
+                I'm genuinely still finding neon paint in places I didn't know existed on my body 😂
+            </div>
+        </div>
+        
+        <!-- Reply 2 -->
+        <div class="reply clearfix">
+            <span class="reply-arrows">&gt;&gt;</span>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="name">ThailandMaxxer</span>
+                (ID: <span class="poster-id teal">Wm8nQ4Lp</span>)
+                <span class="flag-us"></span>
+                <span class="timestamp">10/23/11(Sun)11:19:22</span>
+                <span class="post-num">No.<a href="#">527591145</a></span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="post-content">
+                Been to 6 Full Moons now. They never get old. Each one is a unique fever dream.<br><br>
+                Pro tips for newbies:<br>
+                <span class="greentext">&gt;wear shoes you don't care about (they WILL be destroyed)</span><br>
+                <span class="greentext">&gt;don't bring your phone to the beach</span><br>
+                <span class="greentext">&gt;pace yourself on the buckets</span><br>
+                <span class="greentext">&gt;make friends early, you'll need them later</span><br><br>
+                The friends you make at 5am watching the sunrise hit different. Had some of the deepest conversations of my life with complete strangers.
+            </div>
+        </div>
+        
+        <!-- Reply 3 -->
+        <div class="reply yellow-reply clearfix">
+            <span class="reply-arrows">&gt;&gt;</span>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="name">PartyAnimal</span>
+                <span class="tripcode">!sendhelp</span>
+                (ID: <span class="poster-id red">Qm5nK8Wp</span>)
+                <span class="flag-uk"></span>
+                <span class="timestamp">10/23/11(Sun)11:26:55</span>
+                <span class="post-num">No.<a href="#">527591212</a></span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="post-content">
+                <a href="#" class="quotelink">&gt;&gt;527591078</a><br><br>
+                LMAOOO I saw that guy! He was wearing a banana costume right? Security was NOT amused but the crowd went absolutely wild.<br><br>
+                <a href="#" class="quotelink">&gt;&gt;527591145</a><br>
+                Based advice. I learned the shoe lesson the hard way. RIP to my favorite Nikes 🙏<br><br>
+                Currently watching the ocean from my hammock. Life is good frens. Life is really good.
+            </div>
+        </div>
+        
+        <!-- Reply 4 -->
+        <div class="reply clearfix">
+            <span class="reply-arrows">&gt;&gt;</span>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="name">Anonymous</span>
+                (ID: <span class="poster-id navy">Px7mK2Ln</span>)
+                <span class="flag-br"></span>
+                <span class="timestamp">10/23/11(Sun)11:33:18</span>
+                <span class="post-num">No.<a href="#">527591289</a></span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="post-content">
+                Reading this thread while stuck in traffic in São Paulo.<br><br>
+                <span class="greentext">&gt;tfw you will never party on a Thai beach with anons</span><br>
+                <span class="greentext">&gt;why even live</span><br><br>
+                Just kidding, booking flights as we speak. See you degenerates at the next one. 🛫🏝️
+            </div>
+        </div>
+    </div>
+    
+    <div class="thread-separator"></div>
+    
+    <!-- Party Thread 3: Greek Islands -->
+    <div class="thread">
+        <div class="op-post clearfix">
+            <div class="file-info">
+                File: <a href="#">mykonos_sunset.jpg</a> (567 KB, 1800x1200)
+            </div>
+            <div class="post-image-container">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='100' viewBox='0 0 150 100'%3E%3Cdefs%3E%3ClinearGradient id='greek' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23ff6b6b'/%3E%3Cstop offset='50%25' style='stop-color:%23ffd93d'/%3E%3Cstop offset='100%25' style='stop-color:%234ecdc4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23greek)' width='150' height='100'/%3E%3Crect x='20' y='50' width='25' height='30' fill='white'/%3E%3Crect x='55' y='45' width='20' height='35' fill='white'/%3E%3Crect x='85' y='55' width='30' height='25' fill='white'/%3E%3Crect x='22' y='52' width='8' height='8' fill='%230077be'/%3E%3Crect x='35' y='52' width='8' height='8' fill='%230077be'/%3E%3Ctext x='75' y='92' font-family='Arial' font-size='8' fill='white' text-anchor='middle'%3EMYKONOS 🇬🇷%3C/text%3E%3C/svg%3E" class="post-image" alt="Mykonos Sunset">
+            </div>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="subject">Greek island hopping with the boys - Day 5 report</span>
+                <span class="name">OpaAnon</span>
+                <span class="tripcode">!ouzoTime</span>
+                (ID: <span class="poster-id olive">Hm6nP3Qk</span>)
+                <span class="flag-us"></span>
+                <span class="timestamp">10/23/11(Sun)13:45:02</span>
+                <span class="post-num">No.<a href="#">527594001</a></span>
+                [<a href="#" class="reply-link">Reply</a>]
+            </div>
+            <div class="post-content">
+                Mykonos update: WE ARE STILL ALIVE (barely)<br><br>
+                The squad has been island hopping for 5 days now and I genuinely don't think any of us have been sober for more than 3 hours at a time.<br><br>
+                <span class="greentext">&gt;day 1: Santorini - wine tasting that turned into wine chugging</span><br>
+                <span class="greentext">&gt;day 2: Still Santorini - too hungover to move, watched sunset, started drinking again</span><br>
+                <span class="greentext">&gt;day 3: Ferry to Mykonos - pregamed on the boat like absolute degenerates</span><br>
+                <span class="greentext">&gt;day 4: Beach club marathon - bottle service was a mistake but also the best decision</span><br>
+                <span class="greentext">&gt;day 5: Currently at a rooftop bar, can see the whole island, questioning my life choices (affectionately)</span><br><br>
+                The sunsets here are UNREAL. Pic related. Worth every hangover.
+            </div>
+        </div>
+        
+        <div class="omitted">
+            <span class="arrow">▶</span> 73 replies and 28 images omitted. <a href="#">Click here</a> to view.
+        </div>
+        
+        <!-- Reply 1 -->
+        <div class="reply clearfix">
+            <span class="reply-arrows">&gt;&gt;</span>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="name">Anonymous</span>
+                (ID: <span class="poster-id maroon">Km9nL4Qp</span>)
+                <span class="flag-uk"></span>
+                <span class="timestamp">10/23/11(Sun)13:52:38</span>
+                <span class="post-num">No.<a href="#">527594078</a></span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="post-content">
+                <a href="#" class="quotelink">&gt;&gt;527594001</a><br><br>
+                KING behavior. I did Greece last summer and it genuinely changed my perspective on life.<br><br>
+                There's something about watching a sunset over the Aegean while sipping ouzo that makes all your problems seem small.<br><br>
+                Did you hit up Scorpios beach club? Absolutely mandatory.
+            </div>
+        </div>
+        
+        <!-- Reply 2 -->
+        <div class="reply red-reply clearfix">
+            <span class="reply-arrows">&gt;&gt;</span>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="name">GyroEnjoyer</span>
+                (ID: <span class="poster-id purple">Wx3mP8Ln</span>)
+                <span class="flag-de"></span>
+                <span class="timestamp">10/23/11(Sun)13:59:15</span>
+                <span class="post-num">No.<a href="#">527594145</a></span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="post-content">
+                I'm on Paros rn, just a ferry away from you degenerates!<br><br>
+                Should I come crash your party? I've been solo traveling and could use some fellow anon energy.<br><br>
+                Also I found a taverna that does unlimited ouzo for €15. The owner is based and keeps giving us free shots. My Greek is terrible but we communicate through vibes and hand gestures. 🤝
+            </div>
+        </div>
+        
+        <!-- Reply 3 -->
+        <div class="reply yellow-reply clearfix">
+            <span class="reply-arrows">&gt;&gt;</span>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="name">OpaAnon</span>
+                <span class="tripcode">!ouzoTime</span>
+                (ID: <span class="poster-id olive">Hm6nP3Qk</span>)
+                <span class="flag-us"></span>
+                <span class="timestamp">10/23/11(Sun)14:05:47</span>
+                <span class="post-num">No.<a href="#">527594212</a></span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="post-content">
+                <a href="#" class="quotelink">&gt;&gt;527594078</a><br>
+                Scorpios was yesterday! Absolutely legendary. The DJ transition from afternoon chill to sunset euphoria was *chef's kiss*<br><br>
+                <a href="#" class="quotelink">&gt;&gt;527594145</a><br>
+                BRO YES GET OVER HERE. More anons = more chaos = more memories. We're at a place called Jackie O's tonight. Find us - I'll be the one in the ridiculous Hawaiian shirt.<br><br>
+                <span class="greentext">&gt;tfw making friends from a mongolian basket weaving forum while in Greece</span><br>
+                <span class="greentext">&gt;the internet is beautiful</span>
+            </div>
+        </div>
+        
+        <!-- Reply 4 -->
+        <div class="reply clearfix">
+            <span class="reply-arrows">&gt;&gt;</span>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="name">Anonymous</span>
+                (ID: <span class="poster-id green">Qx7nK2Mp</span>)
+                <span class="flag-fr"></span>
+                <span class="timestamp">10/23/11(Sun)14:12:33</span>
+                <span class="post-num">No.<a href="#">527594289</a></span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="post-content">
+                This thread is giving me severe FOMO but also motivation.<br><br>
+                I've been saving for months and this is the sign I needed. Booking Greece for June. You beautiful bastards better still be posting trip reports by then.<br><br>
+                <span class="greentext">&gt;wagmi to the Mediterranean</span><br><br>
+                Life is short. Party hard. Touch grass (and sand). 🏖️
+            </div>
+        </div>
+        
+        <!-- Reply 5 -->
+        <div class="reply clearfix">
+            <span class="reply-arrows">&gt;&gt;</span>
+            <div class="post-header">
+                <input type="checkbox" class="post-checkbox">
+                <span class="name">GyroEnjoyer</span>
+                (ID: <span class="poster-id purple">Wx3mP8Ln</span>)
+                <span class="flag-de"></span>
+                <span class="timestamp">10/23/11(Sun)14:19:08</span>
+                <span class="post-num">No.<a href="#">527594356</a></span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="post-content">
+                <a href="#" class="quotelink">&gt;&gt;527594212</a><br><br>
+                SAY LESS. Catching the 6pm ferry. See you beautiful degenerates tonight.<br><br>
+                This is why I love this board. Strangers become friends become memories. 🤙<br><br>
+                <span class="greentext">&gt;thread theme: dancing through life, one island at a time</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+        [<a href="#">Home</a>] [<a href="#">Boards</a>] [<a href="#">Advertise</a>] [<a href="#">Contact</a>] [<a href="#">FAQ</a>]<br><br>
+        All content copyright their respective owners.<br>
+        This is a recreation for educational purposes only.
+    </div>
+</body>
+</html>
